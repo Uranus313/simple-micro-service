@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplemicroservice
+spec:
+  selector:
+    matchLabels:
+      app: simplemicroservice
+  template:
+    metadata:
+      labels:
+        app: simplemicroservice
+    spec:
+      containers:
+      - name: simplemicroservice
+        image: simplemicroservice
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
