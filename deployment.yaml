@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: simplemicroservice
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: simplemicroservice
@@ -12,6 +13,7 @@ spec:
         app: simplemicroservice
     spec:
       containers:
+      
       - name: simplemicroservice
         image: simplemicroservice
         imagePullPolicy: IfNotPresent
@@ -19,5 +21,31 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+        - name: MONGO_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: HOST
+        - name: MONGO_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: PORT      
+        - name: MONGO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_USERNAME
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_PASSWORD   
+        - name: JWTSECRET
+          valueFrom:
+            secretKeyRef:
+              name: user-secret
+              key: JWTSECRET       
         ports:
         - containerPort: 3000

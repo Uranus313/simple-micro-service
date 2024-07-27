@@ -9,12 +9,8 @@ const router = express.Router();
 
 router.get("/", async (req, res) =>{
     try {
-        const jobs = await getUsers();
-        const token = jwt.sign(jobs,process.env.JWTSECRET);
-
-        res.header("x-auth-token",token).send(jobs.response);
-
-        res.send(jobs);
+        const users = await getUsers();
+        res.send(users);
     } catch (err) {
         console.log("Error",err);
         res.status(500).send("internal server error");
