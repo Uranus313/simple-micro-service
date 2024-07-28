@@ -24,8 +24,8 @@ router.get("/:id", async (req, res) =>{
         return;
     } 
     try {
-        const jobs = await getUsers(req.params.id);
-        res.send(jobs);
+        const user = await getUsers(req.params.id);
+        res.send(user);
     } catch (err) {
         console.log("Error",err);
         res.status(500).send("internal server error");
