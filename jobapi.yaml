@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simplemicroservice
+  name: jobapi
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: simplemicroservice
+      app: jobapi
   template:
     metadata:
       labels:
-        app: simplemicroservice
+        app: jobapi
     spec:
       containers:
-      
-      - name: simplemicroservice
-        image: simplemicroservice
+      - name: jobapi
+        image: jobapi
         imagePullPolicy: IfNotPresent
         env:
         - name: MONGO_HOST
@@ -49,11 +48,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: simplemicroservice
+  name: jobapi
 spec:
   type: ClusterIP
   selector:
-    app: simplemicroservice
+    app: jobapi
   ports:
   - port: 3000
     targetPort: 3000
+
