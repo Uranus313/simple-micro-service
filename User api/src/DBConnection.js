@@ -4,11 +4,13 @@ export default function(){
     const password = process.env.MONGO_PASSWORD;
     const MONGO_HOST = process.env.MONGO_HOST || 'localhost'; // Default to localhost
     const MONGO_PORT = process.env.MONGO_PORT || 27017; // Default MongoDB port
-    let dbURL = `mongodb://${username}:${password}@${MONGO_HOST}:${MONGO_PORT}`;
-    if (!username){
-        dbURL = `mongodb://${MONGO_HOST}:${MONGO_PORT}`;
-    }
-    dbURL += "/sms?authSource=admin"; 
+    // let dbURL = `mongodb://${username}:${password}@${MONGO_HOST}:${MONGO_PORT}`;
+    // if (!username){
+    //     dbURL = `mongodb://${MONGO_HOST}:${MONGO_PORT}`;
+    // }
+    // let dbURL = `mongodb://${username}:${password}@mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017`;
+    let dbURL = "mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017";
+    dbURL += "/sms?authSource=admin&replicaSet=rs0&readPreference=secondaryPreferred"; 
     console.log(dbURL)
     mongoose.connect(dbURL).then(() => console.log("connected")).catch(err => console.log(err));
 }

@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: demo-storage  # Specifies the name of the StorageClass
+provisioner: docker-desktop  # Specifies the provisioner used for volume provisioning
+volumeBindingMode: Immediate  # Specifies that volumes should be immediately bound when requested
+reclaimPolicy: Delete  # Specifies the reclaim policy for the volumes (Delete in this case)

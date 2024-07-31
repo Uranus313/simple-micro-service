@@ -5,4 +5,9 @@ metadata:
 data:
   HOST: mongo-service
   PORT: "27017"
+  mongodb.conf: |  
+    storage:
+      dbPath: /data/db  
+    replication:
+      replSetName: "rs0"
 

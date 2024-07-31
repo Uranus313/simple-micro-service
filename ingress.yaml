@@ -5,7 +5,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - http:
+  - host: myapp.local
+    http:
       paths:
       - path: /users
         pathType: Prefix
